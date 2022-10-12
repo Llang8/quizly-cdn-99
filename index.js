@@ -7,7 +7,12 @@ dotenv.config()
 
 const app = express()
 
+app.set("view engine", "ejs")
+app.set("views", "./src/templates/views")
+
 connectDB()
+
+require("./src/routes")(app)
 
 app.get('/', (req, res) => {
     res.send('HELLO WORLD')
