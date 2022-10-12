@@ -14,9 +14,9 @@ connectDB()
 
 require("./src/routes")(app)
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.send('HELLO WORLD')
-})
+}) */
 
 app.use('/graphql', graphqlHTTP({
     schema: require('./src/graphql/schema'),
