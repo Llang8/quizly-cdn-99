@@ -1,5 +1,5 @@
 const { User, Question, Quiz, Submission } = require('../models')
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLList } = require('graphql')
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLList, GraphQLInputObjectType } = require('graphql')
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -79,6 +79,25 @@ const QuestionType = new GraphQLObjectType({
     })
 })
 
+const QuestionInputType = new GraphQLInputObjectType({
+    name: 'QuestionInput',
+    description: 'Question input type',
+    fields: () => ({
+        title: { type: GraphQLString },
+        correctAnswer: { type: GraphQLString },
+        order: { type: GraphQLInt }
+    })
+})
+
+const AnswerInputType = new GraphQLInputObjectType({
+    name: 'AnswerInput',
+    description: 'Answer input type',
+    fields: () => ({
+        questionId: { type: GraphQLString },
+        answer: { type: GraphQLString }
+    })
+})
+
 const SubmissionType = new GraphQLObjectType({
     name: 'Submission',
     description: 'Submission type',
@@ -117,5 +136,7 @@ module.exports = {
     UserType,
     QuizType,
     QuestionType,
-    SubmissionType
+    SubmissionType,
+    QuestionInputType,
+    AnswerInputType
 }
