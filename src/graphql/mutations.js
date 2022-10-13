@@ -1,6 +1,8 @@
 const { GraphQLString, GraphQLNonNull, GraphQLList } = require('graphql')
 const { QuestionInputType, AnswerInputType } = require('./types')
 const { User, Quiz, Question, Submission } = require("../models")
+const { createJWT } = require('../util/auth')
+
 /* 
 * Register a user
 */
@@ -27,7 +29,8 @@ const register = {
 
         await newUser.save()
 
-        return newUser.id
+        const token = createJWT(user)
+        return token
     }
 }
 
@@ -44,7 +47,8 @@ const login = {
             throw new Error("Password incorrect or user with this email does not exist")
         }
 
-        return 'User Logged in'
+        const token = createJWT(user)
+        return token
     }
 }
 

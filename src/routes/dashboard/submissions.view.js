@@ -1,3 +1,3 @@
 module.exports = async(req,res) => {
-    res.render('submissions')
+    res.render('submissions', { user: req.verifiedUser.user })
 }
